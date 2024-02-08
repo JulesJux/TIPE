@@ -2,7 +2,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <math.h>
-#include "../gnuplot_i/gnuplot_i.h"
+#include "gnuplot/gnuplot.h"
 #include <string.h>
 
 void charge_cond_graph(gnuplot_ctrl *h, double u0, double E, double R, double C, int n){
