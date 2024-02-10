@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <object class="GtkWindow" id="window">
+    <child>
+      <object class="GtkFixed" id="fixed1">
+        <child>
+          <object class="GtkButton" id="button1">
+            <property name="label">Charge du condensateur</property>
+            <property name="margin-start">100</property>
+            <property name="margin-top">100</property>
+            <signal name="clicked" handler="on_button1_clicked"/>
+            <style/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="test"/>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
