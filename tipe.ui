@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
+<!-- <requires lib="gtk" version="4.0"/> -->
   <object class="GtkWindow" id="window">
     <child>
       <object class="GtkFixed" id="fixed1">
@@ -14,7 +14,24 @@
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="test"/>
+          <object class="GtkLabel" id="test">
+            <property name="label">test</property>
+          </object>
+
+        </child>
+        <child>
+          <object class="GtkEntry" id="text_entry">
+           <!-- <property name="activates-default">True</property> -->
+            <property name="buffer">
+              <object class="GtkEntryBuffer" id="entry_buffer">
+                <property name="max-length">10</property>
+              </object>
+            </property>
+            <property name="margin-start">100</property>
+            <property name="max-length">10</property>
+            <property name="placeholder-text">enter text</property>
+            <property name="text">yousk2</property>
+          </object>
         </child>
       </object>
     </child>
