@@ -1,36 +1,80 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
-<!-- <requires lib="gtk" version="4.0"/> -->
+  <!-- interface-name tipe.ui -->
   <object class="GtkWindow" id="window">
+    <property name="default-height">1080</property>
+    <property name="default-width">1920</property>
     <child>
       <object class="GtkFixed" id="fixed1">
         <child>
           <object class="GtkButton" id="button1">
             <property name="label">Charge du condensateur</property>
-            <property name="margin-start">100</property>
-            <property name="margin-top">100</property>
+            <property name="margin-start">111</property>
+            <property name="margin-top">155</property>
             <signal name="clicked" handler="on_button1_clicked"/>
             <style/>
+            <!-- Custom fragments -->
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="test">
-            <property name="label">test</property>
+          <object class="GtkLabel" id="gen_tension_text">
+            <property name="label">Tension du générateur :</property>
           </object>
-
         </child>
         <child>
-          <object class="GtkEntry" id="text_entry">
-           <!-- <property name="activates-default">True</property> -->
+          <object class="GtkEntry" id="gen_tension_entry">
+            <property name="activates-default">True</property>
             <property name="buffer">
-              <object class="GtkEntryBuffer" id="entry_buffer">
+              <object class="GtkEntryBuffer" id="gen_tension_entry_buffer">
                 <property name="max-length">10</property>
               </object>
             </property>
-            <property name="margin-start">100</property>
-            <property name="max-length">10</property>
-            <property name="placeholder-text">enter text</property>
-            <property name="text">yousk2</property>
+            <property name="margin-start">350</property>
+            <property name="max-length">15</property>
+            <property name="placeholder-text">En Volt</property>
+            <property name="width-request">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="capa_text">
+            <property name="label">Capacité du condensateur :</property>
+            <property name="margin-top">60</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="capa_entry">
+            <property name="activates-default">True</property>
+            <property name="buffer">
+              <object class="GtkEntryBuffer" id="capa_entry_buffer">
+                <property name="max-length">10</property>
+              </object>
+            </property>
+            <property name="margin-start">350</property>
+            <property name="margin-top">50</property>
+            <property name="max-length">15</property>
+            <property name="placeholder-text">En Farads</property>
+            <property name="width-request">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="res_text">
+            <property name="label">Résistance :</property>
+            <property name="margin-top">120</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="res_entry">
+            <property name="activates-default">True</property>
+            <property name="buffer">
+              <object class="GtkEntryBuffer" id="res_entry_buffer">
+                <property name="max-length">10</property>
+              </object>
+            </property>
+            <property name="margin-start">350</property>
+            <property name="margin-top">100</property>
+            <property name="max-length">15</property>
+            <property name="placeholder-text">En Ohm</property>
+            <property name="width-request">200</property>
           </object>
         </child>
       </object>
