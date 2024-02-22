@@ -19,11 +19,14 @@ GObject *button;
 GObject *gen_tension_entry_buffer;
 GObject *capa_entry_buffer;
 GObject *res_entry_buffer;
+GObject *charge_init_entry_buffer;
+
 
 typedef struct data_s {
     GtkEntryBuffer *gen_tension_entry_buffer;
     GtkEntryBuffer *capa_entry_buffer;
     GtkEntryBuffer *res_entry_buffer;
+    GtkEntryBuffer *charge_init_entry_buffer;
 } datas;
 
 #endif //CHARGE_CONDENSATEUR_H
