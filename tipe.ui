@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
 <interface>
   <!-- interface-name tipe.ui -->
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="window">
     <property name="default-height">1080</property>
     <property name="default-width">1920</property>
@@ -9,8 +11,8 @@
         <child>
           <object class="GtkButton" id="button1">
             <property name="label">Charge du condensateur</property>
-            <property name="margin-start">111</property>
-            <property name="margin-top">155</property>
+            <property name="margin-start">200</property>
+            <property name="margin-top">250</property>
             <signal name="clicked" handler="on_button1_clicked"/>
             <style/>
             <!-- Custom fragments -->
@@ -19,6 +21,7 @@
         <child>
           <object class="GtkLabel" id="gen_tension_text">
             <property name="label">Tension du générateur :</property>
+            <property name="margin-top">10</property>
           </object>
         </child>
         <child>
@@ -29,10 +32,18 @@
                 <property name="max-length">10</property>
               </object>
             </property>
-            <property name="margin-start">350</property>
+            <property name="margin-start">450</property>
+            <property name="margin-top">5</property>
             <property name="max-length">15</property>
             <property name="placeholder-text">En Volt</property>
             <property name="width-request">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="img">
+            <property name="file">../assets/resistance.svg</property>
+            <property name="margin-start">500</property>
+            <property name="margin-top">500</property>
           </object>
         </child>
         <child>
@@ -49,8 +60,8 @@
                 <property name="max-length">10</property>
               </object>
             </property>
-            <property name="margin-start">350</property>
-            <property name="margin-top">50</property>
+            <property name="margin-start">450</property>
+            <property name="margin-top">55</property>
             <property name="max-length">15</property>
             <property name="placeholder-text">En Farads</property>
             <property name="width-request">200</property>
@@ -59,7 +70,7 @@
         <child>
           <object class="GtkLabel" id="res_text">
             <property name="label">Résistance :</property>
-            <property name="margin-top">120</property>
+            <property name="margin-top">110</property>
           </object>
         </child>
         <child>
@@ -70,10 +81,31 @@
                 <property name="max-length">10</property>
               </object>
             </property>
-            <property name="margin-start">350</property>
-            <property name="margin-top">100</property>
+            <property name="margin-start">450</property>
+            <property name="margin-top">105</property>
             <property name="max-length">15</property>
             <property name="placeholder-text">En Ohm</property>
+            <property name="width-request">200</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="charge_init_text">
+            <property name="label">Charge initiale du condensateur :</property>
+            <property name="margin-top">160</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="charge_init_entry">
+            <property name="activates-default">True</property>
+            <property name="buffer">
+              <object class="GtkEntryBuffer" id="charge_init_entry_buffer">
+                <property name="max-length">10</property>
+              </object>
+            </property>
+            <property name="margin-start">450</property>
+            <property name="margin-top">155</property>
+            <property name="max-length">15</property>
+            <property name="placeholder-text">En Volt</property>
             <property name="width-request">200</property>
           </object>
         </child>
