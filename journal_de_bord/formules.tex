@@ -1,0 +1,80 @@
+%! Author = jules
+%! Date = 17/02/24
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+
+% Document
+\begin{document}
+    \title{TIPE}
+    \author{Jules et Noa}
+    \maketitle
+    \section{Tension aux bornes des dipôles}\label{sec:i}
+
+    \begin{itemize}
+    \item La charge du condensateur (circuit RC) en fonction de \(E\) (tension du générateur) en Volts, \(U_{0}\) la tension initiale du condensateur en Volts, \(R\) la résistance en Ohm, et \(C\) la capacité en Farads est :
+    \[
+        U_{c}(t) = (U_{0}-E) \times e^{\frac{-t}{\tau}} + E
+    \]
+         où \(\tau = RC\) désigne la constante de temps en secondes.
+        \item TODO : créer un algo pour générer les formules pour un circuit quelconque.
+
+\end{itemize}
+    \section{Avantages (valeur ajoutéee) du logiciel}
+    \begin{itemize}
+        \item Open Source et gratuit
+        \item Multiplatforme (windows et linux)
+        \item Correction du circuit
+        \item Mesure de la tension aux bornes des dipôles et affichage graphique
+        \item
+\end{itemize}
+    \section{TODO}
+    \begin{itemize}
+        \item Création d'algo pour les équa diff (Jules)
+        \item Algo/structure de donnée (lsc) (Noa)
+        \item Correction (Noa) (court-circuit, masse)
+        \item GUI (Jules (pas priorité))
+        \item Création des graphs (Jules)
+        \item Tests concurrence
+        \item Journal (latex) (git)
+    \end{itemize}
+    \section{21/03/2024}
+    Définition (court-circuit) : Un circuit est court-circuité s'il existe
+    deux branches en dérivation dont l'une est de résistance très faible devant celle de l'autre (Masse ?)
+    \\
+    11h00 http://abcsite.free.fr/physique/elec/elch5.html
+    \\
+    10h30 https://ieeexplore-ieee-org.ezproxy.uphf.fr/xpl/tocresult.jsp?isnumber=23549
+
+    \section{04/04/2024}
+    https://fr.wikipedia.org/wiki/Topologie \\
+   Notes sur la théorie des graphes et les circuits (à formaliser): \\
+   Dipôles = étiquettes des arrêtes \\
+   Mailles = arrêtes \\
+   Noeuds = sommets \\
+   Direction du courant = orientation du graphe \\
+   
+   Arbre = graphe sans cycle fermée. \\
+   Donc pas de courant dans un arbre. \\
+   Graphe de réseau = ensemble d'arbres. \\
+   Lien = mailles retirées pour former l'arbre. \\
+   Brindilles = mailles restantes dans l'arbre. \\
+   Pour un graphe à n nœuds, le nombre de mailles dans chaque arbre, t, doit être : 
+   $\displaystyle t=n-1 $ et \\ 
+   $\displaystyle b=\ell +t $ \\
+   où b est le nombre de mailles du graphe et l, le nombre de liens 
+   retires pour former l'arbre. \\
+   Résolution d'un circuit : \\
+   But : trouver des variables indépendantes qui caractérisent tout les dipôles d'un circuit (Par exemple : Intensité). \\
+   Le nombre minimum de courants de maille requis pour une solution complète est l'ensemble des liens noté I. \\
+   Pour résoudre : ensemble de boucles indépendantes. \\ (Voir https://en.wikipedia.org/wiki/Mesh-analysis) (remplacer - par underscore) \\
+
+
+   
+
+
+
+    \end{document}
