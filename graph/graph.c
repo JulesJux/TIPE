@@ -26,9 +26,11 @@ int** mult(int** m1,int** m2,int t){
 graph* construit(int S){
     graph* circuit = malloc (sizeof (graph));
     int* som = malloc (sizeof (int)*S);
-    for (int i= 0 ; i < S;i++)som[i]=i+1;
+    for (int i= 0 ; i < S;i++){
+	    som[i]=i+1;
+    }
     circuit->sommet = som;
-    circuit->aretes = NULL ;
+    circuit->aretes = NULL;
     circuit->nbs = S;
     return circuit;
 
@@ -45,6 +47,13 @@ void libere_graph(graph* G){
     libere_m(G->aretes);
 }
 
+void libere_mat(int** mat, int taille){
+	for(int i = 0; i < taille; i++){
+		free(mat[i]);	
+	}
+	free(mat);
+}
+
 graph* ajoute_S(graph* G){
     int* S1 = G->sommet;
     int* S2 = malloc(sizeof(int)*((G->nbs)+1));
@@ -58,26 +67,19 @@ graph* ajoute_S(graph* G){
 }
 
 void ajoute_A(graph* G,int a,int b){
-    maillon* ar = malloc(sizeof(maillon));
-    ar->a = a;
-    ar->b =b;
-    ar->next = NULL;
-    maillon* act = G->aretes;
-    if(act == NULL)G->aretes = ar;
-    else{
-        while(act->next != ar){
-            if (act->next == NULL){
-                act->next = ar;
-            }
-            act = act->next;
-        }
+    assert(estdansgraph(G, a) && estdansgraph(G, b));
+    if (!estvoisin(G, a, b)){
+	maillon* new = malloc(sizeof(maillon));
+	new->a = a;
+	new->b = b;
+	new->next = G->aretes;
+	G->aretes = new;
     }
-
 }
 
 //acquisition information
 
-bool estdansgraph(graph* G,int n){return ((n <= G->nbs)&&(n>= 1));}
+bool estdansgraph(graph* G,int s){return ((s < G->nbs)&&(s>= 0));}
 
 bool estvoisin(graph* G,int u,int v){
     int* vois_u = voisins(G,u);
@@ -91,16 +93,8 @@ bool estvoisin(graph* G,int u,int v){
     return false ;
 }
 
-bool estarete(graph*G,int a,int b){  //meme chose que estvoisin mais defini avec G->arete
-    maillon* act = G->aretes;
-    while (act != NULL){
-        if (act->a == a && act->b == b)return true;
-    }
-    return false;
-}
-
 bool estchemin(graph* G,maillon* chemin){
-    return (chemin == NULL)||(estarete(G,chemin->a,chemin->b)&&(chemin->next==NULL||chemin->b == chemin->next->a)&&estchemin(G,chemin->next));
+    return (chemin == NULL)||(estvoisin(G,chemin->a,chemin->b)&&(chemin->next==NULL||chemin->b == chemin->next->a)&&estchemin(G,chemin->next));
 }
 
 bool existechemin(graph* G,int u,int v,int etape){
@@ -145,12 +139,13 @@ bool estconexe(graph* G){
 
 int* voisins(graph* G,int s){
     assert(estdansgraph(G,s));
-    int* vois = malloc(sizeof(int)*G->nbs) ;
+    int* vois = malloc(sizeof(int)*G->nbs+1) ;
     vois[0] = 0;
     maillon* act = G->aretes ;
-    while (act != NULL) {if (act->a == s) {
-        vois[0]++; 
-        vois[vois[0]] = act-> b ;
+    while (act != NULL) {
+	if (act->a == s) {
+        	vois[0]++; 
+        	vois[vois[0]] = act-> b ;
         } 
         act = act->next;
     }
@@ -166,25 +161,70 @@ int** adjacence (graph* G){
     return table;
 }
 
-int ** mat_adj(graph* G){
+int** mat_adj(graph* G){
     int** mat = malloc (G->nbs* sizeof(int*));
     for (int i = 0;i < G->nbs ;i++){
         mat[i]= malloc(G->nbs* sizeof(int));
     }
     for (int i = 0;i < G->nbs;i++ ){
         for (int j = 0;j < G->nbs;j++ ){
-          if (estarete(G, i, j))mat[i][j] = 1;
-          else mat[i][j] = 0 ;
+          if (estvoisin(G, i, j)){
+		  mat[i][j] = 1;
+	  }
+          else {
+		  mat[i][j] = 0 ;
+	  }
         }
     }
     return mat;
 }
 
+void suppr_A(graph* G, int a, int b){
+	if(estvoisin(G, a, b)){
+		maillon* tmp = NULL;
+		maillon* act = G->aretes;
+		if(act->a == a && act->b == b){
+			G->aretes = act->next;
+			free(act); // SEG FAULT²
+		}
+		while(act->next != NULL){
+			if(act->next->a == a && act->next->b == b){
+				tmp = act->next;	
+				act->next = act->next->next;
+				free(tmp);
+		}
+			act = act->next;
+		}
+	}
+}
+
+// Affichage
+
+void print_mat(graph* G){
+	int** mat = mat_adj(G);
+	for(int i = 0; i < G->nbs; i++){
+		for(int j = 0; j < G->nbs; j++){
+			printf("%d, ", mat[i][j]);
+		}
+		printf("\n");
+	}
+	libere_mat(mat, G->nbs);
+}
 
 
 int main(){
-    graph* circuit = construit(1);
-    printf("%d \n",circuit-> sommet [0] );
-    libere_graph(circuit);
+	int sommets = 3;
+    	graph* circuit = construit(sommets);
+	ajoute_A(circuit, 0, 1);
+	ajoute_A(circuit, 1, 2);
+	ajoute_A(circuit, 2, 0);
+	print_mat(circuit);
+	printf("\n");
+	suppr_A(circuit, 2, 0);
+	print_mat(circuit);
+	ajoute_S(circuit);
+	libere_graph(circuit);
     return 0;
 }
+
+
