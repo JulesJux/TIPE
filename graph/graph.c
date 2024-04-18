@@ -1,5 +1,34 @@
 #include "graph.h"
 
+int main(){
+	int sommets = 3;
+    	graph* circuit = construit(sommets);
+	ajoute_A(circuit, 0, 1);
+	ajoute_A(circuit, 1, 2);
+	ajoute_A(circuit, 2, 0);
+	print_mat(circuit);
+	printf("\n");
+	suppr_A(circuit, 2, 0);
+	print_mat(circuit);
+	ajoute_S(circuit);
+	printf("\n");
+	print_mat(circuit);
+	printf("\n");
+	ajoute_A(circuit, 3, 0);
+	ajoute_A(circuit, 2, 3);
+	print_mat(circuit);
+	printf("\n");
+	int* arb = arborescence(circuit, 0);
+	for(int i =0; i < circuit->nbs; i++){
+		printf("%d ", arb[i]);
+	}
+	//int* vois = voisins(circuit, 0);
+	//printf("%d\n", vois[1]);
+	printf("\n");
+	libere_graph(circuit);	
+    return 0;
+}
+
 //operation autres
 
 int** mult(int** m1,int** m2,int t){
@@ -185,8 +214,9 @@ void suppr_A(graph* G, int a, int b){
 		maillon* act = G->aretes;
 		if(act->a == a && act->b == b){
 			G->aretes = act->next;
-			free(act); // SEG FAULT²
+			free(act);
 		}
+		else{
 		while(act->next != NULL){
 			if(act->next->a == a && act->next->b == b){
 				tmp = act->next;	
@@ -195,8 +225,36 @@ void suppr_A(graph* G, int a, int b){
 		}
 			act = act->next;
 		}
+	}}
+}
+
+void parcours(graph* G, int u, bool* dejaVu, int* peres){
+	dejaVu[u] = true;
+	int* vois = voisins(G, u);
+	for(int j = 1; j <= vois[0]; j++){
+		int v = vois[j];
+		if(!dejaVu[v]){
+			peres[v] = u;
+			parcours(G, v, dejaVu, peres);
+		}
 	}
 }
+
+int* arborescence(graph* G, int u){
+	bool* dejaVu = malloc(sizeof(bool)*G->nbs);
+	for(int i = 0; i < G->nbs; i++){
+		dejaVu[i] = false;
+	}
+	int* peres = malloc(sizeof(int)*G->nbs);
+	for(int i = 0; i < G->nbs; i++){
+		peres[i] = 0;
+	}
+	peres[u] = -1;
+	parcours(G, u, dejaVu, peres);
+	free(dejaVu);
+	return peres;
+}
+
 
 // Affichage
 
@@ -209,22 +267,6 @@ void print_mat(graph* G){
 		printf("\n");
 	}
 	libere_mat(mat, G->nbs);
-}
-
-
-int main(){
-	int sommets = 3;
-    	graph* circuit = construit(sommets);
-	ajoute_A(circuit, 0, 1);
-	ajoute_A(circuit, 1, 2);
-	ajoute_A(circuit, 2, 0);
-	print_mat(circuit);
-	printf("\n");
-	suppr_A(circuit, 2, 0);
-	print_mat(circuit);
-	ajoute_S(circuit);
-	libere_graph(circuit);
-    return 0;
 }
 
 
