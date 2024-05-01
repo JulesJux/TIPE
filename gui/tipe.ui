@@ -41,7 +41,7 @@
         </child>
         <child>
           <object class="GtkImage" id="img">
-            <property name="file">../assets/resistance.svg</property>
+            <property name="file">assets/resistance.svg</property>
             <property name="margin-start">500</property>
             <property name="margin-top">500</property>
           </object>

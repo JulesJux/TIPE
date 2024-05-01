@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.22)
 project(TIPE C)
 
 set(CMAKE_C_STANDARD 11)
 
 add_executable(TIPE charge_condensateur.c
-        gnuplot/gnuplot.c
+        ../gnuplot/gnuplot.c
         charge_condensateur.h
         #editeur_circuit.ui
         #editeur_circuit.c

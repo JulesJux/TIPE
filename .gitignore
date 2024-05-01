@@ -7,4 +7,7 @@ gui/CMakeFiles/
 gui/Makefile
 gui/TIPE
 gui/cmake_install.cmake
-
+journal_de_bord/formules.aux
+journal_de_bord/formules.log
+journal_de_bord/ed.hup
+/graph/graph
