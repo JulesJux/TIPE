@@ -10,4 +10,5 @@ gui/cmake_install.cmake
 journal_de_bord/formules.aux
 journal_de_bord/formules.log
 journal_de_bord/ed.hup
+journal_de_bord/chordless_cycle
 /graph/graph

@@ -255,6 +255,9 @@ int* arborescence(graph* G, int u){
 	return peres;
 }
 
+int* enum_chordless_path(int** G, int s, int, t, int* Q){ // G -> graphe (en liste d'adjascence); s, t -> sommets; Q -> liste de sommets
+	
+}
 
 // Affichage
 

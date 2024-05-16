@@ -82,6 +82,30 @@
 Chordless cycle graph \\
 https://w.wiki/9ntG \\
 
+\section{16/05/2024}
+Cycles sans cordes : \\
+Lemme 1 :		    Pour un sommet $v\in N(s)$,
+ $P$ est un $s$-$t$ chemin sans corde contenant $v$ si et seulement si
+ $P\setminus s$ est un $v$-$t$ chemin sans corde du graphe
+ $G\setminus (N(s) \setminus v)$. \\
+
+
+Lemme 2 : L'ensemble des $s$-$t$ chemins de $G$ est partitionné en ensembles disjoints de $s$-$t$ chemins sans corde dans le graph
+ $G\setminus (N(s) \setminus v)$ pour tout $v$. \\
+
+\newpage
+Algorithme : \\
+\begin{tabbing}
+{\bf Enum\_Chordless\_Path} ($G=(V,E), s, t, Q$)\\
+1. {\bf Si} l'arrête $\{ s, t\}$ existe dans $E$ {\bf alors} output $Q \cup t$;
+ {\bf return}\\
+2. {\bf pour tout} $v\in N(s)$ s.t. un $v$-$t$ chemin qui existe dans
+ $G\setminus (N(s) \setminus v)$ {\bf faire}\\
+3. \ \  \ \ appeler {\bf Enum\_Chordless\_Path} ($(G\setminus (N(s)\setminus
+  v))\setminus s, v, t, Q\cup v$)\\
+4. {\bf fin du for}
+\end{tabbing}
+
 	
    
 
