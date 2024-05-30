@@ -23,7 +23,6 @@ int main(void){
 
 void exemple(void){
 	liste* ex = malloc(sizeof(liste)*4);
-	printf("\n Graph : \n");
 	for(int i = 0; i < 4; i++){
 		ex[i] = NULL;
 	}
@@ -36,14 +35,16 @@ void exemple(void){
 	ex[2] = ajoute_sommet(ex[2], 0);
 	ex[2] = ajoute_sommet(ex[2], 1);
 
+	printf("graphe initial : \n");
 	affiche(ex, 4);
 
 	liste* G2 = construit_ss_graphe(ex, ex[0], 4);
 	liste* G3 = construit_ss_graphe(ex, ex[1], 4);
 	liste* G4 = construit_ss_graphe(ex, ex[3], 4);
 
-	affiche(G2, 4);
-	affiche(G3, 4);
+	//affiche(G2, 4);
+	//affiche(G3, 4);
+	printf("Graphe privé des voisins de 3 : \n");
 	affiche(G4, 4);
 
 	return;
@@ -96,15 +97,12 @@ liste* construit_ss_graphe(liste* G, liste N, int taille){
 			while(ptr != NULL){
 				if(!liste_mem(ptr->val, N)){
 					G2[i] =	ajoute_sommet(G2[i], ptr->val);
-					//printf("\n copie voisin de %d : %d \n",i, ptr->val);
 					
 				}
 				ptr = ptr->next;
 			}
-			printf("CEST LA");
-			affiche(G2, 4);
 		}
-	}
+	} 	
 	return G2;
 }
 
@@ -117,5 +115,4 @@ liste enumm_chordless_path(liste* G, int s, int t, liste Q, int taille){
 		liste* G2 = NULL; 
 	}
 }
-
 
