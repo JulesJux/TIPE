@@ -3,18 +3,28 @@
 #include <stdbool.h>
 
 struct maillon_s {
-int val;
-struct maillon_s* next;
+	int val;
+	struct maillon_s* next;
 };
 typedef struct maillon_s maillon;
 
 typedef maillon* liste;
+
+typedef liste chemin;
+
+struct maillon_chemin_s {
+	chemin path;
+	struct maillon_chemin_s* next;
+};
+typedef struct maillon_chemin_s maillon_chemin;
+typedef maillon_chemin* liste_chemin;
 
 
 liste* construit_ss_graphe(liste* G, liste N, int taille);
 liste ajoute_sommet(liste l, int u);
 void affiche(liste* G, int taille);
 void exemple(void);
+liste pop(liste l, int u);
 
 
 int main(void){
@@ -50,6 +60,21 @@ void exemple(void){
 	return;
 }
 
+void libere_liste(liste l){
+	while(l != NULL){
+		liste tmp = l;
+		l = l -> next;
+		free(tmp);
+	}
+}
+
+void libere_graphe(liste* G, int taille){
+	for(int i = 0; i < taille; i++){
+		libere_liste(G[i]);
+	}
+	free(G);
+}
+
 void affiche(liste* G, int taille){
 	for(int i = 0; i < taille; i++){
 		liste ptr = G[i];
@@ -76,6 +101,29 @@ bool liste_mem(int u, liste l){
 	}
 }
 
+bool liste_chemin_mem(chemin weg, liste_chemin l){
+	if(l == NULL){
+		return false;
+	}
+	if (weg == l->path){
+		return true;
+	}
+	else{
+		return liste_chemin_mem(weg, l->next);
+	}
+}
+
+liste pop(liste l, int u){
+	liste new = NULL;
+	while(l != NULL){
+		if(l->val!=u){
+			ajoute_sommet(new, l->val);
+		}
+		l = l->next;
+	}
+	return new;
+}
+
 liste ajoute_sommet(liste l, int u){
 	if (liste_mem(u, l)){
 		return l;
@@ -83,6 +131,18 @@ liste ajoute_sommet(liste l, int u){
 	else{
 		maillon* new = malloc(sizeof(maillon));
 		new -> val = u;
+		new -> next = l;
+		return new;
+	}
+}
+
+liste_chemin ajoute_chemin(liste_chemin l, chemin weg){
+	if (liste_chemin_mem(weg, l)){
+		return l;
+	}
+	else{
+		liste_chemin new = malloc(sizeof(liste_chemin));
+		new -> path = pop(weg, -1);
 		new -> next = l;
 		return new;
 	}
@@ -97,7 +157,7 @@ liste* construit_ss_graphe(liste* G, liste N, int taille){
 			while(ptr != NULL){
 				if(!liste_mem(ptr->val, N)){
 					G2[i] =	ajoute_sommet(G2[i], ptr->val);
-					
+		 		
 				}
 				ptr = ptr->next;
 			}
@@ -106,13 +166,21 @@ liste* construit_ss_graphe(liste* G, liste N, int taille){
 	return G2;
 }
 
-liste enumm_chordless_path(liste* G, int s, int t, liste Q, int taille){
+liste_chemin enumm_chordless_path(liste* G, int s, int t, liste Q, int taille, liste_chemin res){
 	if(liste_mem(t, G[s])){
-		return ajoute_sommet(Q, t); 
+		chemin Q2 = ajoute_sommet(Q, t);
+		free(Q2);
+		return ajoute_chemin(res, Q2);
 	}
 	maillon* ptr = G[s];
 	while (ptr != NULL){
-		liste* G2 = NULL; 
+		liste N2 = pop(G[s], ptr->val);
+		liste* G2 = construit_ss_graphe(G, pop(N2, s), taille);
+		liste Q2 = ajoute_sommet(Q, ptr->val);
+		res = enumm_chordless_path(G2, ptr->val, t, Q2, taille, res);
+		free(Q2);
+		libere_graphe(G2, taille);
+		ptr = ptr->next;
 	}
+	return res;
 }
-
