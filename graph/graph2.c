@@ -25,6 +25,10 @@ liste ajoute_sommet(liste l, int u);
 void affiche(liste* G, int taille);
 void exemple(void);
 liste pop(liste l, int u);
+liste_chemin enumm_chordless_path(liste* G, int s, int t, liste Q, int taille, liste_chemin res);
+void affiche_chemin(chemin weg);
+void libere_graphe(liste* G, int taille);
+void libere_liste(liste l);
 
 
 int main(void){
@@ -38,24 +42,27 @@ void exemple(void){
 	}
 	ex[0] = ajoute_sommet(ex[0], 1);
 	ex[0] = ajoute_sommet(ex[0], 2);
+	//ex[0] = ajoute_sommet(ex[0], 3);
 	ex[1] = ajoute_sommet(ex[1], 0);
 	ex[1] = ajoute_sommet(ex[1], 2);
 	ex[1] = ajoute_sommet(ex[1], 3);
-	ex[3] = ajoute_sommet(ex[3], 1);
 	ex[2] = ajoute_sommet(ex[2], 0);
 	ex[2] = ajoute_sommet(ex[2], 1);
+	ex[2] = ajoute_sommet(ex[2], 3);
+	//ex[3] = ajoute_sommet(ex[3], 0);
+	ex[3] = ajoute_sommet(ex[3], 1);
+	ex[3] = ajoute_sommet(ex[3], 2);
+	
+	liste_chemin lc = enumm_chordless_path(ex, 0, 3, NULL, 4, NULL);
 
-	printf("graphe initial : \n");
-	affiche(ex, 4);
+	while(lc != NULL){
+		affiche_chemin(lc->path);
+		liste tmp = lc->path;
+		lc = lc->next;
+		libere_liste(tmp);
+	}
 
-	liste* G2 = construit_ss_graphe(ex, ex[0], 4);
-	liste* G3 = construit_ss_graphe(ex, ex[1], 4);
-	liste* G4 = construit_ss_graphe(ex, ex[3], 4);
-
-	//affiche(G2, 4);
-	//affiche(G3, 4);
-	printf("Graphe privé des voisins de 3 : \n");
-	affiche(G4, 4);
+	libere_graphe(ex, 4);
 
 	return;
 }
@@ -86,6 +93,14 @@ void affiche(liste* G, int taille){
 		printf("\n");
 	}
 	return;
+}
+
+void affiche_chemin(chemin weg){
+	while(weg != NULL){
+		printf("%d", weg->val);
+		weg = weg -> next;
+	}
+	printf("\n");
 }
 
 
