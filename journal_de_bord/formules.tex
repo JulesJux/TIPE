@@ -76,7 +76,7 @@
    Maille essentielle (essential mesh) = maille qui ne contient aucune autre maille. \\
    Maille de courant (mesh current) = le courant qui traverse les mailles essentielles (en pratique les mailles de courant sont toutes dans le sens horaire). \\
    Exeptions : supermaille (supermesh) et source dépendante (dependent source). \\
-
+    \end{itemize}
 \section{18/04/2024}
  https://arxiv.org/abs/1404.7610 \\
 Chordless cycle graph \\
@@ -97,21 +97,20 @@ Lemme 2 : L'ensemble des $s$-$t$ chemins de $G$ est partitionné en ensembles di
 Algorithme : \\
 \begin{tabbing}
 {\bf Enum\_Chordless\_Path} ($G=(V,E), s, t, Q$)\\
-1. {\bf Si} l'arrête $\{ s, t\}$ existe dans $E$ {\bf alors} output $Q \cup t$;
- {\bf return}\\
-2. {\bf pour tout} $v\in N(s)$ s.t. un $v$-$t$ chemin qui existe dans
+	1. {\bf Si} l'arrête $\{ s, t\}$ existe dans $E$ {\bf alors} {\bf renvoyer} $Q \cup t$;\\
+2. {\bf pour tout} $v\in N(s)$ tel que un $v$-$t$ chemin existe dans
  $G\setminus (N(s) \setminus v)$ {\bf faire}\\
 3. \ \  \ \ appeler {\bf Enum\_Chordless\_Path} ($(G\setminus (N(s)\setminus
   v))\setminus s, v, t, Q\cup v$)\\
 4. {\bf fin du for}
 \end{tabbing}
-
-\section{30/05/2024}
-Topologie des circuits électriques : \\
-		    \begin{itemize}
-			    \item 
-   
-
-    \end{itemize}
-
+\newpage
+   \section{Bibliographie}
+   \begin{itemize}
+	\item https://arxiv.org/abs/1404.7610 
+	\item https://fr.wikipedia.org/wiki/Graphe\textunderscore cordal
+	\item https://en.wikipedia.org/wiki/Mesh\textunderscore analysis
+	\item https://ieeexplore-ieee-org.ezproxy.uphf.fr/stamp/stamp.jsp?tp=\&arnumber=1085419
+	\item https://fr.wikipedia.org/w/index.php?title=Topologie\textunderscore (circuits\textunderscore \%C3\%A9lectriques)
+\end{itemize}
     \end{document}

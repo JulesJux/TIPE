@@ -1,0 +1,13 @@
+Titre :
+    Modélisation numérique et résolution d'un circuit électrique
+
+Problématique :
+    Comment représenter informatiquement un circuit électrique linéaire quelconque et
+    trouver la tension et l'intensité aux bornes de chaque dipole ?
+
+Thématiques :
+    INFORMATIQUE (grammaires, OCaml et C, )
+    PHYSIQUE (électronique)
+
+Mots-clés :
+    Modélisation, circuits électriques,
