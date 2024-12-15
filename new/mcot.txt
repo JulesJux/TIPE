@@ -1,13 +1,42 @@
 Titre :
     Modélisation numérique et résolution d'un circuit électrique
 
-Problématique :
+
+Ancrage au thème :
+    Ce projet de simulateur de circuit électrique s'inscrit dans le thème "Transition, transformation, conversion". Il aide les étudiants à faire la transition de la théorie à la pratique. En transformant un circuit physique en structure de données, il permet aux ingénieurs d'anticiper le comportement du circuit en convertissant leurs idées.  (50 mots)
+
+
+Motivation du choix de l'étude :
+    Ce projet permet de conserver un savoir-faire concernant l'étude des circuits électriques dans un monde où l'intelligence artificielle prédomine les sciences.
+    Il explore deux types d'implémentation informatique d'un circuit électrique et illustre leurs avantages et inconvénients afin de résoudre le circuit. (41 mots)
+
+
+MCOT :
+
+    1. Positionnements thématiques :
+        - Informatique Théorique :
+            -- Théorie des langages
+            -- Structures de données
+
+        - Électronique
+
+
+     et Mots-clés :
+        Modélisation, circuits électriques,
+
+
+2. Bibliographie commentée (650 mots max)
+
+3. Problématique (50 mots max):
     Comment représenter informatiquement un circuit électrique linéaire quelconque et
     trouver la tension et l'intensité aux bornes de chaque dipole ?
 
-Thématiques :
-    INFORMATIQUE (grammaires, OCaml et C, )
-    PHYSIQUE (électronique)
+4. Objectifs du TIPE (100 mots max)
 
-Mots-clés :
-    Modélisation, circuits électriques,
+5. Liste de références bibliographiques (2 à 10 références)
+    [1] https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/tree/master?tab=readme-ov-file
+    [2] https://ieeexplore-ieee-org.ezproxy.uphf.fr/stamp/stamp.jsp?tp=\&arnumber=1085419
+    [3] https://arxiv.org/abs/1404.7610
+    [4] https://fr.wikipedia.org/wiki/Graphe_cordal
+    [5] https://en.wikipedia.org/wiki/Mesh_analysis
+    [6] https://fr.wikipedia.org/wiki/Topologie_(circuits_%C3%A9lectriques)
