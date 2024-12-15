@@ -51,29 +51,24 @@ let parser tl = match parser_E tl with
   |cir,[EOF]-> cir
   | _ -> raise Syntax_error
 
+let round a n = let b = Float.pow 10. a in
+        Float.round (n *. b) /. b;;
 
 let __evaluate cir u0 = 
-        let resi = ref [] in 
-        let rec itot cir = match cir with
-                |Res (x) -> u0/.x 
-                |Bin (Sr, x, y) -> itot x +. itot y  
-                |Bin (Dr, x, y) -> 1./.(1./.(itot x) +. 1./.(itot y)) 
+        let rec req cir = match cir with
+                |Res (x) -> x
+                |Bin (Sr, x, y) -> req x +. req y
+                |Bin (Dr, x, y) -> 1./.(1./.(req x) +. 1./.(req y)) in
         
-        let rec cur cir = match cir with 
-                |Res(x) -> []
-                |Bin (Sr,x,y) -> [cur(x)]@[cur(y)] 
+       let rec intensites cir i_tot = match cir with
+                | Res x -> [i_tot]
+                | Bin (Sr, x, y) -> (intensites x i_tot) @ (intensites y i_tot)
+                | Bin (Dr, x, y) ->
+                        let ix = i_tot *. (req x /. (req x +. req y)) in
+                        let iy = i_tot *. (req y /. (req x +. req y)) in
+                        (intensites x ix) @ (intensites y iy) in
 
-        let rec res cir cur curx cury = 
-                match cir with
-                |Res(x) -> ()
-                |Bin(Sr, x, y) -> resi:=cur::cur::!resi; res x cur cur cur; res y cur cur cur
-                |Bin(Dr, x, y) -> let ncurx = cur*.(curx/.(curx+.cury)) in 
-                                let ncury = cur*.(cury/.(curx+.cury)) in 
-                                resi:=ncurx::ncury::!resi; res x cur ncurx ncury; res y cur ncurx ncury 
-                
-        in itot cir  
-
-                
+        List.map (round 3.) (intensites cir (u0/.(req cir)))
 
 let evaluate cir  = __evaluate (parser(lexer cir))
 
