@@ -14,22 +14,28 @@ Motivation du choix de l'étude :
 MCOT :
 
     1. Positionnements thématiques :
+        - Informatique Pratique :
+            -- Modélisation informatique
+            -- Simulation informatique
+
+
         - Informatique Théorique :
             -- Théorie des langages
             -- Structures de données
+
 
         - Électronique
 
 
      et Mots-clés :
-        Modélisation, circuits électriques,
+        Modélisation, circuits électriques
 
 
 2. Bibliographie commentée (650 mots max)
 
+
 3. Problématique (50 mots max):
-    Comment représenter informatiquement un circuit électrique linéaire quelconque et
-    trouver la tension et l'intensité aux bornes de chaque dipole ?
+    Comment, à partir d’une entrée fournie par l’utilisateur, représenter informatiquement un circuit électrique quelconque et trouver la tension et l'intensité aux bornes de chaque dipôle ?
 
 4. Objectifs du TIPE (100 mots max)
 

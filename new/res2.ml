@@ -72,3 +72,26 @@ let __evaluate cir u0 =
 
 let evaluate cir  = __evaluate (parser(lexer cir))
 
+let test_circuit circuit u0 =
+  let result = evaluate circuit u0 in
+  Printf.printf "Circuit: %s\n" circuit;
+  Printf.printf "Intensities: ";
+  List.iter (fun x -> Printf.printf "%.3f " x) result;
+  Printf.printf "\n\n"
+
+let () =
+  (* Test 1: Circuit avec une seule résistance *)
+  (*test_circuit "(2)" 10.0; *) (* Par exemple, une tension de 10V *)
+
+  (* Test 2: Circuit avec deux résistances en série *)
+  test_circuit "(2 - 3)" 10.0;
+
+  (* Test 3: Circuit avec deux résistances en parallèle *)
+  test_circuit "(2 | 3)" 10.0;
+
+  (* Test 4: Circuit avec résistances en série et parallèle *)
+  test_circuit "(2 | (3 - 4))" 10.0;
+
+  (* Test 5: Circuit avec résistances imbriquées *)
+  test_circuit "((2 | 3) - 4)" 10.0
+
