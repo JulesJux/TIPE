@@ -10,7 +10,6 @@ Motivation du choix de l'étude :
     Ce projet permet de conserver un savoir-faire concernant l'étude des circuits électriques dans un monde où l'intelligence artificielle prédomine les sciences.
     Il explore deux types d'implémentation informatique d'un circuit électrique et illustre leurs avantages et inconvénients afin de résoudre le circuit. (41 mots)
 
-
 MCOT :
 
     1. Positionnements thématiques :
